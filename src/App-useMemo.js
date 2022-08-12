@@ -6,16 +6,20 @@ import "./styles.css";
 
 export default function App() {
   const [count, setCount] = useState(0);
+  const [query, setQuery] = useState(0);
+  const [users, setUsers] = useState(0);
+  
 
-  useEffect(() => {
-    console.log("APP: RE_RENDER");
-  });
+  const getUsers = async () => {
+    const { data } = await axios.get('https://jsonplaceholder.typicode.com/users');
+    setUsers(data);
+  }
 
   return (
     <div className="App">
       <h1>useCallback vs useMemo</h1>
       <h3>useMemo</h3>
-      <div>count: {count}</div>
+      <input type="text" onChange={event => setQuery(event.target.value)} />
     </div>
   );
 }
